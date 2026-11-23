@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-import "../src/AgentBadge.sol";
+import "../src/PioneerPass.sol";
 
 /// @notice Minimal cheatcode interface, defined locally.
 /// No forge-std dependency — this repo carries zero third-party code.
@@ -27,10 +27,10 @@ contract MockAgentId {
     }
 }
 
-contract AgentBadgeTest {
+contract PioneerPassTest {
     Vm constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
 
-    AgentBadge badge;
+    PioneerPass badge;
     MockAgentId agentId;
 
     address holder = address(0xA11CE);
@@ -44,7 +44,7 @@ contract AgentBadgeTest {
         vm.warp(T0);
         agentId = new MockAgentId();
         agentId.setBalance(holder, 1);
-        badge = new AgentBadge(address(agentId), "");
+        badge = new PioneerPass(address(agentId), "");
     }
 
     // ---- tiny assertion helpers (no forge-std) ----
@@ -67,7 +67,7 @@ contract AgentBadgeTest {
     // ---- mint gate ----
     function testMint_RevertsForNonHolder() public {
         vm.prank(nonHolder);
-        vm.expectRevert(AgentBadge.NotAgentIdHolder.selector);
+        vm.expectRevert(PioneerPass.NotAgentIdHolder.selector);
         badge.mint();
     }
 
@@ -85,14 +85,14 @@ contract AgentBadgeTest {
         vm.prank(holder);
         badge.mint();
         vm.prank(holder);
-        vm.expectRevert(AgentBadge.AlreadyMinted.selector);
+        vm.expectRevert(PioneerPass.AlreadyMinted.selector);
         badge.mint();
     }
 
     // ---- check-in ----
     function testCheckIn_RevertsWithoutBadge() public {
         vm.prank(holder); // holds Agent ID but never minted
-        vm.expectRevert(AgentBadge.NoBadge.selector);
+        vm.expectRevert(PioneerPass.NoBadge.selector);
         badge.checkIn();
     }
 
@@ -112,7 +112,7 @@ contract AgentBadgeTest {
         vm.prank(holder);
         badge.checkIn();
         vm.prank(holder);
-        vm.expectRevert(AgentBadge.AlreadyCheckedInToday.selector);
+        vm.expectRevert(PioneerPass.AlreadyCheckedInToday.selector);
         badge.checkIn();
     }
 
@@ -145,7 +145,7 @@ contract AgentBadgeTest {
         badge.mint();
         agentId.setBalance(holder, 0); // Agent ID gone
         vm.prank(holder);
-        vm.expectRevert(AgentBadge.NotAgentIdHolder.selector);
+        vm.expectRevert(PioneerPass.NotAgentIdHolder.selector);
         badge.checkIn();
     }
 

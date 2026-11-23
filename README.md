@@ -1,9 +1,9 @@
-# AgentBadge — Agent Pioneer Badge
+# PioneerPass — Pioneer Pass
 
-> **Working name.** Final project name to be confirmed by the user before deploy.
-> Do NOT use "Binance" / "BNB" in the final project name, token name, or domain
-> (hackathon red line). The repo name `binance-agent-badge` is a working
-> identifier only — rename it to the final name before submit if needed.
+> **Final name — confirmed by the user 23 Nov 2026.** Token "Pioneer Pass"
+> (`PPASS`). No "Binance" / "BNB" in the project, token, or domain name
+> (hackathon red line). Repo renamed from `binance-agent-badge` to
+> `pioneer-pass` 23 Nov 2026.
 
 Free ERC-721 badge + daily check-in streak for **Agent ID** holders, built for the
 **Binance Agent ID Hackathon 2026** (submit 18 Nov → 9 Dec 2026 15:00 WIB).
@@ -18,9 +18,9 @@ This attacks both Pioneer metrics at once: unique Agent ID addresses (free mint)
 **and** transaction count (daily check-ins). The Agent ID gate lives **in the
 contract** (not just the frontend) — the strongest integration pattern.
 
-## Contract — `src/AgentBadge.sol`
+## Contract — `src/PioneerPass.sol`
 
-- **ERC-721** "Agent Pioneer Badge" (`APB`), dependency-free minimal
+- **ERC-721** "Pioneer Pass" (`PPASS`), dependency-free minimal
   implementation written from scratch (no OpenZeppelin — see note below).
 - **Gate (on-chain):** `mint()` and `checkIn()` both require
   `balanceOf(caller) > 0` on the SPACE ID Agent ID contract
@@ -51,7 +51,7 @@ forge test        # 12 tests, all passing
 forge test --gas-report
 ```
 
-Tests (`test/AgentBadge.t.sol`, no forge-std — cheatcode interface is defined
+Tests (`test/PioneerPass.t.sol`, no forge-std — cheatcode interface is defined
 locally in the test file, mock Agent ID included):
 
 | Test | What it proves |

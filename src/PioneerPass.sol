@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title AgentBadge — Agent Pioneer Badge
+/// @title PioneerPass — Pioneer Pass
 /// @notice Free ERC-721 badge + daily check-in streak for Agent ID holders.
 /// @dev Dependency-free minimal ERC-721 (no OpenZeppelin) — written from scratch
 /// so this repo carries zero third-party code.
@@ -23,7 +23,7 @@ interface IERC721Receiver {
         returns (bytes4);
 }
 
-contract AgentBadge {
+contract PioneerPass {
     // ---- custom errors ----
     error NotAgentIdHolder();
     error AlreadyMinted();
@@ -44,8 +44,8 @@ contract AgentBadge {
     event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
 
     // ---- ERC-721 metadata ----
-    string public constant name = "Agent Pioneer Badge";
-    string public constant symbol = "APB";
+    string public constant name = "Pioneer Pass";
+    string public constant symbol = "PPASS";
 
     // ---- state ----
     IAgentId public immutable agentId;
